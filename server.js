@@ -5,7 +5,6 @@ const hbs = require("express-handlebars");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
-const { serialize, deserialize } = require("v8");
 
 const app = express();
 
@@ -47,6 +46,11 @@ app.use(passport.session());
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
 
 app.get("/user/logged", (req, res) => {
   res.render("logged");
