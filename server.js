@@ -2,31 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const hbs = require("express-handlebars");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
+const passport = require("passport");
+const passportConfig = require("./config/passport");
 
 const app = express();
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.clientID,
-      clientSecret: process.env.clientSecret,
-      callbackURL: process.env.callbackURL,
-    },
-    (accessToken, refreshToken, profile, done) => {
-      done(null, profile);
-    }
-  )
-);
-
-passport.serializeUser((user, serialize) => {
-  serialize(null, user);
-});
-passport.deserializeUser((obj, deserialize) => {
-  deserialize(null, obj);
-});
 
 app.engine(
   "hbs",
