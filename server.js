@@ -4,7 +4,7 @@ const path = require("path");
 const hbs = require("express-handlebars");
 const session = require("express-session");
 const passport = require("passport");
-const passportConfig = require("./config/passport");
+require("./config/passport");
 
 const app = express();
 
